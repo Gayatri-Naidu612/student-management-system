@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Student Management Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Real-time Top Status Bar -->
+    <div class="top-status-bar">
+        <div class="status-indicator offline" id="serverStatus">
+            <span class="dot"></span> <span id="statusText">Connecting to API...</span>
+        </div>
+        <div class="system-info">
+            <span id="liveTime"></span> | <span>Academic Year 2026-27</span>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="app-header">
+        <div class="brand">
+            <div class="logo">EduPortal</div>
+            <p>Student Performance Management Platform</p>
+        </div>
+        <nav class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('dashboardTab')">📊 Dashboard</button>
+            <button class="nav-btn" onclick="switchTab('directoryTab')">📋 Student Directory</button>
+            <button class="nav-btn" onclick="switchTab('formTab')" id="addNavBtn">➕ Add Student</button>
+            <button class="nav-btn" onclick="switchTab('analyticsTab')">📈 Analytics & Reports</button>
+        </nav>
+    </header>
+
+    <main class="main-container">
+
+        <!-- TAB 1: DASHBOARD VIEW -->
+        <section id="dashboardTab" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card border-blue">
+                    <div class="stat-title">Total Enrolled</div>
+                    <div class="stat-value" id="totalStudents">0</div>
+                    <div class="stat-desc">Active Student Records</div>
+                </div>
+                <div class="stat-card border-green">
+                    <div class="stat-title">Class Average</div>
+                    <div class="stat-value" id="avgMarks">0%</div>
+                    <div class="stat-desc">Overall Score Mean</div>
+                </div>
+                <div class="stat-card border-purple">
+                    <div class="stat-title">Top Performance</div>
+                    <div class="stat-value" id="maxMarks">0</div>
+                    <div class="stat-desc">Highest Recorded Marks</div>
+                </div>
+            </div>
+
+            <div class="dashboard-widgets">
+                <div class="widget-card">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button onclick="switchTab('formTab')" class="btn-primary">Register New Student</button>
+                        <button onclick="switchTab('directoryTab')" class="btn-secondary">View Directory</button>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <h3>Academic Performance Summary</h3>
+                    <div class="progress-item">
+                        <span>Distinction Rate (≥ 75%)</span>
+                        <div class="progress-bar"><div class="progress-fill bg-distinction" id="distinctionBar" style="width: 0%"></div></div>
+                    </div>
+                    <div class="progress-item">
+                        <span>Pass Rate (≥ 40%)</span>
+                        <div class="progress-bar"><div class="progress-fill bg-pass" id="passBar" style="width: 0%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: STUDENT DIRECTORY VIEW -->
+        <section id="directoryTab" class="tab-content">
+            <div class="card">
+                <div class="table-header-tools">
+                    <h2>Student Records Directory</h2>
+                    <input type="text" id="searchInput" placeholder="🔍 Search by student name or roll number...">
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Student Name</th>
+                                <th>Class/Dept</th>
+                                <th>Marks</th>
+                                <th>Grade Status</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: ADD / EDIT STUDENT VIEW -->
+        <section id="formTab" class="tab-content">
+            <div class="card form-card">
+                <h2 id="formTitle">Register New Student</h2>
+                <form id="studentForm">
+                    <input type="hidden" id="studentId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="rollNo">Roll Number</label>
+                            <input type="text" id="rollNo" placeholder="e.g. 101" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="e.g. Anish Naidu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentClass">Class / Department</label>
+                            <input type="text" id="studentClass" placeholder="e.g. CS-A" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="marks">Academic Marks (0-100)</label>
+                            <input type="number" id="marks" placeholder="0 - 100" step="0.01" min="0" max="100" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="contact">Contact Number (10 Digits)</label>
+                            <input type="text" id="contact" placeholder="e.g. 9876543210" required pattern="\d{10}">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="saveBtn" class="btn-primary">Save Record</button>
+                        <button type="button" id="cancelBtn" class="btn-cancel" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 4: ANALYTICS & REPORTS VIEW -->
+        <section id="analyticsTab" class="tab-content">
+            <div class="card">
+                <h2>Class Performance Distribution</h2>
+                <div class="analytics-cards">
+                    <div class="analytics-box">
+                        <h4 id="distinctionCount">0</h4>
+                        <p>Distinction Records (≥ 75%)</p>
+                    </div>
+                    <div class="analytics-box">
+                        <h4 id="passCount">0</h4>
+                        <p>Passing Records (40% - 74%)</p>
+                    </div>
+                    <div class="analytics-box">
+                        <h4 id="failCount">0</h4>
+                        <p>Needs Improvement (&lt; 40%)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+:root {
+    --primary-color: #1e293b;
+    --accent-color: #2563eb;
+    --success-color: #059669;
+    --warning-color: #d97706;
+    --danger-color: #dc2626;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    color: #334155;
+}
+
+/* Status Bar */
+.top-status-bar {
+    background-color: #0f172a;
+    color: #94a3b8;
+    padding: 6px 24px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.online .dot { background: #10b981; box-shadow: 0 0 6px #10b981; }
+.status-indicator.offline .dot { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+
+/* Header & Tab Navigation */
+.app-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px 24px 0 24px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.brand .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.brand p {
+    margin: 2px 0 16px 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover { color: #f8fafc; }
+.nav-btn.active {
+    color: #38bdf8;
+    border-bottom: 3px solid #38bdf8;
+}
+
+/* Main Layout & Section Switching */
+.main-container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Dashboard Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-card.border-green { border-left-color: var(--success-color); }
+.stat-card.border-purple { border-left-color: #8b5cf6; }
+
+.stat-title { font-size: 0.85rem; color: #64748b; font-weight: 600; }
+.stat-value { font-size: 2rem; font-weight: 700; color: #0f172a; margin: 4px 0; }
+.stat-desc { font-size: 0.75rem; color: #94a3b8; }
+
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.widget-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.progress-item { margin-bottom: 12px; font-size: 0.85rem; }
+.progress-bar { background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 4px; }
+.progress-fill { height: 100%; transition: width 0.4s ease; }
+.bg-distinction { background: var(--success-color); }
+.bg-pass { background: var(--accent-color); }
+
+/* Card & Tables */
+.card {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.table-header-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#searchInput {
+    padding: 9px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 280px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+th { background: #f1f5f9; color: #475569; font-size: 0.8rem; text-transform: uppercase; }
+
+/* Badges & Links */
+.badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-distinction { background: #d1fae5; color: #065f46; }
+.badge-pass { background: #dbeafe; color: #1e40af; }
+.badge-fail { background: #fee2e2; color: #991b1b; }
+
+.phone-link { color: var(--accent-color); text-decoration: none; font-weight: 500; }
+.phone-link:hover { text-decoration: underline; }
+
+/* Buttons & Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full-width { grid-column: 1 / -1; }
+
+label { font-size: 0.85rem; font-weight: 600; color: #475569; }
+input { padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; }
+
+.btn-primary { background: var(--accent-color); color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.btn-secondary { background: #64748b; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; }
+.btn-cancel { background: #94a3b8; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; }
+
+button.edit-btn { background: var(--warning-color); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 4px; }
+button.delete-btn { background: var(--danger-color); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+
+/* Analytics Cards */
+.analytics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+.analytics-box { background: #f8fafc; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); }
+.analytics-box h4 { font-size: 1.8rem; margin: 0 0 6px 0; color: var(--accent-color); }
